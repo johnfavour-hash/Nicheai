@@ -1,0 +1,17 @@
+import { z } from "zod";
+
+const SignupSchema = z.object({
+    name: z.string().min(3, "Name must be at least 3 characters long"),
+    email: z.string().email("Invalid email address"),
+    phone: z.string().min(1, "Phone number is required"),
+    password: z.string()
+        .min(8, "Password must be at least 8 characters long")
+        .regex(
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+            "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character"
+        ),
+});
+
+type SignupFormData = z.infer<typeof SignupSchema>;
+export default SignupSchema;
+export type { SignupFormData };
