@@ -121,7 +121,6 @@ export const PublishModal = ({ isOpen, onClose, content }: PublishModalProps) =>
                                             position="absolute"
                                             inset={0}
                                             bgSize="cover"
-                                            bgSize="cover"
                                             backgroundPosition="center"
                                             backgroundImage={`url(${content.imageUrl})`}
                                             aria-label={`Preview for ${content.title || "social media asset"}`}

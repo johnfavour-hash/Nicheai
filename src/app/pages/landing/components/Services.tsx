@@ -72,12 +72,7 @@ const Services = () => {
                     {services.map((service, idx) => (
                         <MotionBox
                             key={idx}
-                            p={10}
-                            borderRadius="4xl"
-                            bg="cream.100"
-                            border="1px solid"
-                            borderColor="cream.300"
-                            p={10}
+                            p={{ base: 8, md: 10 }}
                             borderRadius="4xl"
                             bg="cream.100"
                             border="1px solid"

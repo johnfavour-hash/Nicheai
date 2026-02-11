@@ -12,7 +12,7 @@ const DashboardLayout = () => {
             {/* Main Content Area Right */}
             <Flex flex={1} flexDir="column" overflow="hidden">
                 {/* Topbar sticky */}
-                <TopBar />
+                <TopBar onMenuToggle={() => { }} />
 
                 {/* Content body scrollable */}
                 <Box
