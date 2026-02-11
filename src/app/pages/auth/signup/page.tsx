@@ -55,8 +55,8 @@ const SignupPage = () => {
     };
 
     return (
-        <Box minH="100vh" bg="cream.100" py={{ base: 6, md: 20 }} px={4} display="flex" justifyContent="center" alignItems="center">
-            <Container maxW="md" bg="white" p={{ base: 8, md: 10 }} borderRadius="3xl" boxShadow="xl">
+        <Box minH="100vh" bg="cream.100" py={{ base: 4, md: 20 }} px={4} display="flex" justifyContent="center" alignItems="center">
+            <Container maxW="md" bg="#FFFFFF" p={{ base: 6, md: 10 }} borderRadius="3xl" boxShadow="xl">
                 {step === 1 ? (
                     <VStack gap={6} as="form" onSubmit={handleSubmit(onSignupSubmit)}>
                         <Heading color="bark.500">Join NicheAI</Heading>

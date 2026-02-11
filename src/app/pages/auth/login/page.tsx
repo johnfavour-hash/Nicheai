@@ -31,8 +31,8 @@ const LoginPage = () => {
     };
 
     return (
-        <Box minH="100vh" bg="cream.100" py={{ base: 6, md: 20 }} px={4} display="flex" justifyContent="center" alignItems="center">
-            <Container maxW="md" bg="white" p={{ base: 8, md: 10 }} borderRadius="3xl" boxShadow="xl">
+        <Box minH="100vh" bg="cream.100" py={{ base: 4, md: 20 }} px={4} display="flex" justifyContent="center" alignItems="center">
+            <Container maxW="md" bg="#FFFFFF" p={{ base: 6, md: 10 }} borderRadius="3xl" boxShadow="xl">
                 <VStack gap={6} as="form" onSubmit={handleSubmit(onLoginSubmit)}>
                     <Heading size="md" color="bark.500">Welcome Back</Heading>
                     <Text color="gray.500">Login to continue to your dashboard.</Text>

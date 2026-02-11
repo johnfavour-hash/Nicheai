@@ -23,6 +23,9 @@ import {
 import { useState } from "react";
 import { Link as RouterLink, useLocation, useNavigate } from "react-router";
 import useAuthStore from "@stores/auth.store";
+import { motion, AnimatePresence } from "framer-motion";
+
+const MotionFlex = motion.create(Flex);
 
 interface NavItemProps {
     icon: React.ElementType;
@@ -132,98 +135,104 @@ const Sidebar = ({ isMobileMenuOpen = false, onClose }: SidebarProps) => {
             )}
 
             {/* Sidebar */}
-            <Flex
-                as="aside"
-                flexDir="column"
-                w={isCollapsed ? "80px" : "260px"}
-                h="100vh"
-                bg="white"
-                borderRightWidth={1}
-                borderColor="cream.300"
-                transition="all 0.3s ease"
-                position={{ base: "fixed", lg: "sticky" }}
-                top={0}
-                left={{ base: isMobileMenuOpen ? 0 : "-260px", lg: 0 }}
-                zIndex={1000}
-                display={{ base: "flex", lg: "flex" }}
-            >
-                {/* Logo Section */}
-                <Flex p={6} align="center" justify={isCollapsed ? "center" : "space-between"}>
-                    {!isCollapsed && (
-                        <Text fontSize="xl" fontWeight="bold" color="bark.500">
-                            Niche<Text as="span" color="goldenrod.500">AI</Text>
-                        </Text>
-                    )}
-                    <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => setIsCollapsed(!isCollapsed)}
-                        color="bark.300"
-                        minW={10}
-                        p={0}
+            <AnimatePresence>
+                {(isMobileMenuOpen || window.innerWidth >= 1024) && (
+                    <MotionFlex
+                        as="aside"
+                        flexDir="column"
+                        w={isCollapsed ? "80px" : "260px"}
+                        h="100vh"
+                        bg="white"
+                        borderRightWidth={1}
+                        borderColor="cream.300"
+                        position={{ base: "fixed", lg: "sticky" }}
+                        top={0}
+                        animate={{ x: 0 }}
+                        initial={{ x: window.innerWidth < 1024 ? "-100%" : 0 }}
+                        exit={{ x: "-100%" }}
+                        transition={{ type: "spring", damping: 25, stiffness: 200 }}
+                        zIndex={1000}
+                        display="flex"
                     >
-                        {isCollapsed ? <ChevronRight size={18} /> : <ChevronLeft size={18} />}
-                    </Button>
-                </Flex>
-
-                {/* Navigation Sections */}
-                <VStack flex={1} overflowY="auto" pt={2} px={4} gap={6} align="stretch" css={{
-                    '&::-webkit-scrollbar': { width: '4px' },
-                    '&::-webkit-scrollbar-thumb': { background: '#F4F2EF' },
-                }}>
-                    {sections.map((section) => (
-                        <Box key={section.title}>
+                        {/* Logo Section */}
+                        <Flex p={6} align="center" justify={isCollapsed ? "center" : "space-between"}>
                             {!isCollapsed && (
-                                <Text fontSize="10px" fontWeight="black" color="bark.200" mb={3} px={4} letterSpacing="widest">
-                                    {section.title}
+                                <Text fontSize="xl" fontWeight="bold" color="bark.500">
+                                    Niche<Text as="span" color="goldenrod.500">AI</Text>
                                 </Text>
                             )}
-                            <VStack gap={1}>
-                                {section.items.map((item) => (
-                                    <NavItem
-                                        key={item.href}
-                                        {...item}
-                                        active={location.pathname === item.href}
-                                        collapsed={isCollapsed}
-                                    />
-                                ))}
-                            </VStack>
-                        </Box>
-                    ))}
-                </VStack>
-
-                {/* Bottom Section */}
-                <VStack p={4} gap={4} borderTopWidth={1} borderColor="cream.200">
-                    {!isCollapsed && (
-                        <Box bg="bark.500" p={4} borderRadius="xl" w="full" color="white" position="relative" overflow="hidden">
-                            <Box position="absolute" top={-2} right={-2} w={16} h={16} bg="goldenrod.500" opacity={0.1} borderRadius="full" />
-                            <VStack align="start" gap={1} mb={3}>
-                                <Text fontSize="xs" fontWeight="bold" color="goldenrod.400">PRO PLAN</Text>
-                                <Text fontSize="sm" fontWeight="bold">Unlock 4K Video</Text>
-                            </VStack>
-                            <Button size="xs" w="full" bg="goldenrod.500" color="bark.500" fontWeight="bold">
-                                Upgrade Now
+                            <Button
+                                variant="ghost"
+                                size="sm"
+                                onClick={() => setIsCollapsed(!isCollapsed)}
+                                color="bark.300"
+                                minW={10}
+                                p={0}
+                            >
+                                {isCollapsed ? <ChevronRight size={18} /> : <ChevronLeft size={18} />}
                             </Button>
-                        </Box>
-                    )}
+                        </Flex>
 
-                    <Box w="full">
-                        <NavItem icon={Settings} label="Settings" href="/dashboard/settings" collapsed={isCollapsed} />
-                        <NavItem icon={HelpCircle} label="Help Center" href="/dashboard/help" collapsed={isCollapsed} />
-                        <Separator my={2} borderColor="cream.200" />
-                        <Box
-                            onClick={() => {
-                                clearAuth();
-                                navigate("/");
-                            }}
-                            cursor="pointer"
-                            w="full"
-                        >
-                            <NavItem icon={LogOut} label="Logout" href="#" collapsed={isCollapsed} />
-                        </Box>
-                    </Box>
-                </VStack>
-            </Flex>
+                        {/* Navigation Sections */}
+                        <VStack flex={1} overflowY="auto" pt={2} px={4} gap={6} align="stretch" css={{
+                            '&::-webkit-scrollbar': { width: '4px' },
+                            '&::-webkit-scrollbar-thumb': { background: '#F4F2EF' },
+                        }}>
+                            {sections.map((section) => (
+                                <Box key={section.title}>
+                                    {!isCollapsed && (
+                                        <Text fontSize="10px" fontWeight="black" color="bark.200" mb={3} px={4} letterSpacing="widest">
+                                            {section.title}
+                                        </Text>
+                                    )}
+                                    <VStack gap={1}>
+                                        {section.items.map((item) => (
+                                            <NavItem
+                                                key={item.href}
+                                                {...item}
+                                                active={location.pathname === item.href}
+                                                collapsed={isCollapsed}
+                                            />
+                                        ))}
+                                    </VStack>
+                                </Box>
+                            ))}
+                        </VStack>
+
+                        {/* Bottom Section */}
+                        <VStack p={4} gap={4} borderTopWidth={1} borderColor="cream.200">
+                            {!isCollapsed && (
+                                <Box bg="bark.500" p={4} borderRadius="xl" w="full" color="white" position="relative" overflow="hidden">
+                                    <Box position="absolute" top={-2} right={-2} w={16} h={16} bg="goldenrod.500" opacity={0.1} borderRadius="full" />
+                                    <VStack align="start" gap={1} mb={3}>
+                                        <Text fontSize="xs" fontWeight="bold" color="goldenrod.400">PRO PLAN</Text>
+                                        <Text fontSize="sm" fontWeight="bold">Unlock 4K Video</Text>
+                                    </VStack>
+                                    <Button size="xs" w="full" bg="goldenrod.500" color="bark.500" fontWeight="bold">
+                                        Upgrade Now
+                                    </Button>
+                                </Box>
+                            )}
+
+                            <Box w="full">
+                                <NavItem icon={Settings} label="Settings" href="/dashboard/settings" collapsed={isCollapsed} />
+                                <NavItem icon={HelpCircle} label="Help Center" href="/dashboard/help" collapsed={isCollapsed} />
+                                <Separator my={2} borderColor="cream.200" />
+                                <Box
+                                    onClick={() => {
+                                        clearAuth();
+                                        navigate("/");
+                                    }}
+                                    cursor="pointer"
+                                    w="full"
+                                >
+                                    <NavItem icon={LogOut} label="Logout" href="#" collapsed={isCollapsed} />
+                                </Box>
+                            </Box>
+                        </VStack>
+                    </MotionFlex>
+                )}
+            </AnimatePresence>
         </>
     );
 };

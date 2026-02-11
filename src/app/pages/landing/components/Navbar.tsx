@@ -21,7 +21,7 @@ const Navbar = () => {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
-    const glassBg = { base: "white", _dark: "white" };
+    const glassBg = "#FFFFFF";
 
     return (
         <Box
