@@ -32,7 +32,7 @@ const LoginPage = () => {
 
     return (
         <Box minH="100vh" bg="cream.100" py={{ base: 10, md: 20 }} px={4} display="flex" justifyContent="center" alignItems="center">
-            <Container maxW="md" bg="white" p={{ base: 6, md: 10 }} borderRadius="2xl" boxShadow={{ base: "md", md: "xl" }}>
+            <Container maxW="md" bg="white" p={{ base: 6, md: 10 }} borderRadius="2xl" boxShadow={{ base: "none", md: "xl" }} border={{ base: "1px solid", md: "none" }} borderColor="cream.300">
                 <VStack gap={6} as="form" onSubmit={handleSubmit(onLoginSubmit)}>
                     <Heading size="md" color="bark.500">Welcome Back</Heading>
                     <Text color="gray.500">Login to continue to your dashboard.</Text>
@@ -56,7 +56,17 @@ const LoginPage = () => {
                         borderColor="cream.400"
                         color="bark.400"
                         w="full"
-                        onClick={() => AuthService.signInWithGoogle()}
+                        onClick={async () => {
+                            try {
+                                await AuthService.signInWithGoogle();
+                            } catch (error) {
+                                toaster.create({
+                                    title: "Google Auth Error",
+                                    description: error instanceof Error ? error.message : "Could not connect to Google",
+                                    type: "error"
+                                });
+                            }
+                        }}
                     >
                         <HStack gap={2}>
                             <FcGoogle size={20} />

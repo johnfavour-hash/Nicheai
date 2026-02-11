@@ -81,9 +81,9 @@ const Pricing = () => {
                             key={idx}
                             p={{ base: 8, md: 10 }}
                             borderRadius="3xl"
-                            bg={plan.featured ? "bronze.500" : "white"}
-                            color={plan.featured ? "white" : "bark.500"}
-                            boxShadow="xl"
+                            bg={plan.featured ? "bronze.500" : "#FFFFFF"}
+                            color={plan.featured ? "#FFFFFF" : "bark.500"}
+                            boxShadow={{ base: "lg", md: "xl" }}
                             position="relative"
                             whileHover={{ y: -10 }}
                             transition={{ duration: 0.3 }}
@@ -109,7 +109,7 @@ const Pricing = () => {
                                         <Text fontSize="4xl" fontWeight="black">${plan.price}</Text>
                                         <Text fontSize="sm" opacity={0.8}>/month</Text>
                                     </HStack>
-                                    <Text mt={2} fontWeight="bold" color={plan.featured ? "white" : "bronze.700"}>
+                                    <Text mt={2} fontWeight="bold" color={plan.featured ? "#FFFFFF" : "bronze.700"}>
                                         {plan.tokens}
                                     </Text>
                                 </Box>
@@ -117,7 +117,7 @@ const Pricing = () => {
                                 <List.Root gap={4}>
                                     {plan.features.map((feature, fIdx) => (
                                         <HStack key={fIdx} align="center" gap={3}>
-                                            <Icon as={Check} boxSize="16px" color={plan.featured ? "white" : "bronze.500"} />
+                                            <Icon as={Check} boxSize="16px" color={plan.featured ? "#FFFFFF" : "bronze.500"} />
                                             <Text fontSize="sm" fontWeight="bold">{feature}</Text>
                                         </HStack>
                                     ))}
