@@ -21,7 +21,7 @@ const Navbar = () => {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
-    const glassBg = { base: "whiteAlpha.800", _dark: "bark.500" };
+    const glassBg = { base: "white", _dark: "white" };
 
     return (
         <Box
@@ -35,7 +35,7 @@ const Navbar = () => {
             <Container maxW="7xl" h={20} display="flex" alignItems="center" px={{ base: 6, lg: 12 }}>
                 <Flex justify="space-between" align="center" w="full">
                     <Text
-                        fontSize="2xl" fontWeight="black" color={isScrolled ? "bark.500" : "white"}
+                        fontSize="2xl" fontWeight="black" color={isScrolled ? "bark.500" : (isMenuOpen ? "bark.500" : "white")}
                         cursor="pointer" onClick={() => navigate("/")}
                     >
                         Niche<Text as="span" color="bronze.500">AI</Text>
@@ -83,7 +83,7 @@ const Navbar = () => {
                     <IconButton
                         display={{ base: "flex", lg: "none" }}
                         variant="ghost"
-                        color={isScrolled ? "bark.500" : "white"}
+                        color={isScrolled ? "bark.500" : (isMenuOpen ? "bark.500" : "white")}
                         onClick={() => setIsMenuOpen(!isMenuOpen)}
                     >
                         <Icon as={isMenuOpen ? X : Menu} />
@@ -98,7 +98,7 @@ const Navbar = () => {
                 top="100%"
                 left={0}
                 right={0}
-                bg="white"
+                bg="#FFFFFF"
                 p={8}
                 boxShadow="2xl"
                 zIndex={99}
@@ -121,8 +121,9 @@ const Navbar = () => {
                         w="full"
                         bg="bronze.500"
                         color="white"
-                        py={6}
+                        py={7}
                         borderRadius="full"
+                        fontWeight="black"
                         onClick={() => {
                             navigate("/auth/login");
                             setIsMenuOpen(false);
