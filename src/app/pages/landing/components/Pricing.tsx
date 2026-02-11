@@ -80,7 +80,7 @@ const Pricing = () => {
                     {plans.map((plan, idx) => (
                         <MotionBox
                             key={idx}
-                            p={10}
+                            p={{ base: 8, md: 10 }}
                             borderRadius="3xl"
                             bg={plan.featured ? "bronze.500" : cardBg}
                             color={plan.featured ? "white" : "bark.500"}
@@ -110,7 +110,7 @@ const Pricing = () => {
                                         <Text fontSize="4xl" fontWeight="black">${plan.price}</Text>
                                         <Text fontSize="sm" opacity={0.8}>/month</Text>
                                     </HStack>
-                                    <Text mt={2} fontWeight="bold" color={plan.featured ? "white" : "bronze.700"}>
+                                    <Text mt={2} fontWeight="bold" color={plan.featured ? "cream.50" : "bronze.700"}>
                                         {plan.tokens}
                                     </Text>
                                 </Box>
@@ -118,8 +118,8 @@ const Pricing = () => {
                                 <List.Root gap={4}>
                                     {plan.features.map((feature, fIdx) => (
                                         <HStack key={fIdx} align="center" gap={3}>
-                                            <Icon as={Check} boxSize="16px" color={plan.featured ? "white" : "bronze.500"} />
-                                            <Text fontSize="sm" fontWeight="medium">{feature}</Text>
+                                            <Icon as={Check} boxSize="16px" color={plan.featured ? "cream.100" : "bronze.500"} />
+                                            <Text fontSize="sm" fontWeight="bold">{feature}</Text>
                                         </HStack>
                                     ))}
                                 </List.Root>
