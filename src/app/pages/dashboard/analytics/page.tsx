@@ -8,14 +8,11 @@ import {
     Button,
     SimpleGrid,
     Badge,
-    Spinner,
-    Separator,
     Center,
     Progress,
 } from "@chakra-ui/react";
 import {
     BarChart3,
-    TrendingUp,
     Users,
     MessageSquare,
     Share2,
@@ -28,7 +25,7 @@ import {
 import useAppStore from "@stores/app.store";
 
 export const AnalyticsDashboard = () => {
-    const { niche, projects } = useAppStore();
+    const { niche } = useAppStore();
 
     const stats = [
         { label: "Total Reach", value: "24.5k", change: "+12.5%", trendingUp: true, icon: Eye, color: "blue.500" },

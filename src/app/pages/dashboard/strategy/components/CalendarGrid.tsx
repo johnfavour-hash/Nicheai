@@ -72,7 +72,7 @@ const CalendarGrid = () => {
                                             _hover={{ borderColor: "bronze.300", shadow: "sm" }}
                                         >
                                             <Icon size={12} color="#C05805" />
-                                            <Text fontSize="xs" fontWeight="medium" isTruncated>{event.title}</Text>
+                                            <Text fontSize="xs" fontWeight="medium" truncate>{event.title}</Text>
                                         </HStack>
                                     );
                                 })}

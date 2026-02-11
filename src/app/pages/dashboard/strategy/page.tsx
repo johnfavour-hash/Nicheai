@@ -71,7 +71,7 @@ export const StrategyPlanner = () => {
                 {isLoading ? (
                     <Center py={20}>
                         <VStack gap={4}>
-                            <Spinner size="xl" color="bronze.500" thickness="4px" />
+                            <Spinner size="xl" color="bronze.500" />
                             <Text fontWeight="bold" color="bark.500">Masterminding your content takeover...</Text>
                         </VStack>
                     </Center>
@@ -149,7 +149,7 @@ export const StrategyPlanner = () => {
                                         <Text fontWeight="bold" color="bark.500" mb={2} fontSize="md">
                                             {item.contentType}
                                         </Text>
-                                        <Text fontSize="xs" color="bark.300" mb={4} noOfLines={3}>
+                                        <Text fontSize="xs" color="bark.300" mb={4} lineClamp={3}>
                                             {item.reason}
                                         </Text>
                                         <Button size="sm" variant="surface" colorPalette="bronze" w="full" gap={2}>

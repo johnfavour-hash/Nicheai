@@ -87,7 +87,7 @@ export const AssetsPage = () => {
                             </Center>
                             <Box p={4}>
                                 <HStack justify="space-between" mb={1}>
-                                    <Text fontWeight="bold" fontSize="sm" color="bark.500" noOfLines={1}>
+                                    <Text fontWeight="bold" fontSize="sm" color="bark.500" lineClamp={1}>
                                         {asset.name}
                                     </Text>
                                     <IconButton aria-label="More" variant="ghost" size="xs">
@@ -118,7 +118,7 @@ export const AssetsPage = () => {
                 {/* Empty State Mock */}
                 {assets.length === 0 && (
                     <Center py={20} flexDirection="column" color="bark.200">
-                        <Folder size={60} opacity={0.2} mb={4} />
+                        <Box mb={4} opacity={0.2}><Folder size={60} /></Box>
                         <Text fontWeight="bold">No assets found</Text>
                         <Text fontSize="xs">Upload your first file to get started.</Text>
                     </Center>

@@ -29,7 +29,7 @@ import { toaster } from "@components/ui/toaster";
 import { rewriteText } from "@services/gemini.service";
 
 export const BrandKitManager = () => {
-    const { brandProfile, updateBrandProfile, niche } = useAppStore();
+    const { brandProfile, setBrandProfile, niche } = useAppStore();
     const [isOptimizing, setIsOptimizing] = useState(false);
     const [localProfile, setLocalProfile] = useState(brandProfile || {
         name: '',
@@ -40,7 +40,7 @@ export const BrandKitManager = () => {
     });
 
     const handleSave = () => {
-        updateBrandProfile(localProfile);
+        setBrandProfile(localProfile);
         toaster.create({ title: "Brand profile updated!", type: "success" });
     };
 

@@ -4,22 +4,17 @@ import {
     HStack,
     Text,
     Heading,
-    Icon,
     Button,
     SimpleGrid,
     Badge,
-    Spinner,
     Input,
     Separator,
     Center,
-    List,
-    Alert,
 } from "@chakra-ui/react";
 import {
     Search,
     ShieldAlert,
     Target,
-    TrendingUp,
     Zap,
     Skull,
     Eye,
@@ -151,7 +146,7 @@ export const CompetitorScout = () => {
                     >
                         {!analysis ? (
                             <Center h="full" flexDirection="column" textAlign="center" color="bark.200" py={20}>
-                                <ShieldAlert size={60} opacity={0.3} mb={4} />
+                                <Box mb={4} opacity={0.3}><ShieldAlert size={60} /></Box>
                                 <Heading fontSize="lg">Intelligence Awaiting Deployment</Heading>
                                 <Text fontSize="sm">Perform a scan to reveal competitor weaknesses and content gaps.</Text>
                             </Center>

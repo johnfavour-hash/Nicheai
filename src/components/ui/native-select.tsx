@@ -1,7 +1,7 @@
-import { Select as ChakraSelect } from "@chakra-ui/react"
+import { NativeSelect as ChakraNativeSelect } from "@chakra-ui/react"
 import * as React from "react"
 
-export interface NativeSelectRootProps extends ChakraSelect.RootProps {
+export interface NativeSelectRootProps extends ChakraNativeSelect.RootProps {
     icon?: React.ReactElement
 }
 
@@ -11,11 +11,11 @@ export const NativeSelectRoot = React.forwardRef<
 >(function NativeSelectRoot(props, ref) {
     const { children, ...rest } = props
     return (
-        <ChakraSelect.Root ref={ref} {...rest}>
+        <ChakraNativeSelect.Root ref={ref} {...rest}>
             {children}
-            <ChakraSelect.Indicator />
-        </ChakraSelect.Root>
+            <ChakraNativeSelect.Indicator />
+        </ChakraNativeSelect.Root>
     )
 })
 
-export const NativeSelectField = ChakraSelect.Field
+export const NativeSelectField = ChakraNativeSelect.Field
