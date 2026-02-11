@@ -38,12 +38,12 @@ const LoginPage = () => {
                     <Text color="gray.500">Login to continue to your dashboard.</Text>
 
                     <Box w="full">
-                        <Input placeholder="Email" ps={4} {...register("email")} />
+                        <Input placeholder="Email" ps={4} color="bark.500" _placeholder={{ color: "gray.400" }} {...register("email")} />
                         <Text color="red.500" fontSize="xs" mt={1}>{errors.email?.message}</Text>
                     </Box>
 
                     <Box w="full">
-                        <Input type="password" placeholder="Password" ps={4} {...register("password")} />
+                        <Input type="password" placeholder="Password" ps={4} color="bark.500" _placeholder={{ color: "gray.400" }} {...register("password")} />
                         <Text color="red.500" fontSize="xs" mt={1}>{errors.password?.message}</Text>
                     </Box>
 

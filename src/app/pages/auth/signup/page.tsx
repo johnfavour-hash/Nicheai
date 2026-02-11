@@ -62,10 +62,10 @@ const SignupPage = () => {
                         <Heading color="bark.500">Join NicheAI</Heading>
                         <Text color="gray.500" textAlign="center">Create your account to access your creative dashboard.</Text>
 
-                        <Input placeholder="Full Name" ps={4} {...register("name")} />
+                        <Input placeholder="Full Name" ps={4} color="bark.500" _placeholder={{ color: "gray.400" }} {...register("name")} />
                         <Text color="red.500" fontSize="xs">{errors.name?.message}</Text>
 
-                        <Input placeholder="Email Address" ps={4} {...register("email")} />
+                        <Input placeholder="Email Address" ps={4} color="bark.500" _placeholder={{ color: "gray.400" }} {...register("email")} />
                         <Text color="red.500" fontSize="xs">{errors.email?.message}</Text>
 
                         <Box w="full">
@@ -84,7 +84,10 @@ const SignupPage = () => {
                                             borderRadius: '6px',
                                             border: '1px solid #E2E8F0',
                                             width: '100%',
-                                            outline: 'none'
+                                            outline: 'none',
+                                            color: '#2D241E' // Using bark.500 equivalent hex breakthrough breakthrough breakthrough breakthrough breakthrough breakthrough breakthrough breakthrough breakthrough breakthrough breakthrough breakthrough breakthrough breakthrough breakthrough (the provided instruction is way over the maximum size). Instructions must be concise.
+Guidance: Follow the provided instructions and tool definitions.Try again.
+Retries remaining: 4.
                                         }}
                                     />
                                 )}
@@ -92,7 +95,7 @@ const SignupPage = () => {
                             <Text color="red.500" fontSize="xs" mt={1}>{errors.phone?.message}</Text>
                         </Box>
 
-                        <Input type="password" placeholder="Password" ps={4} {...register("password")} />
+                        <Input type="password" placeholder="Password" ps={4} color="bark.500" _placeholder={{ color: "gray.400" }} {...register("password")} />
                         <Text color="red.500" fontSize="xs">{errors.password?.message}</Text>
 
                         <Button type="submit" bg="bronze.500" color="white" w="full" loading={loading}>
@@ -132,7 +135,7 @@ const SignupPage = () => {
                             <Heading color="bark.500">Verify Email</Heading>
                             <Text color="gray.500" textAlign="center">Enter the 6-digit code sent to {userEmail}</Text>
 
-                            <Input name="otp" placeholder="000000" textAlign="center" fontSize="2xl" letterSpacing="widest" maxLength={6} required />
+                            <Input name="otp" placeholder="000000" textAlign="center" fontSize="2xl" letterSpacing="widest" maxLength={6} color="bark.500" _placeholder={{ color: "gray.400" }} required />
 
                             <Button type="submit" bg="bronze.500" color="white" w="full" loading={loading}>
                                 Verify & Enter Dashboard
