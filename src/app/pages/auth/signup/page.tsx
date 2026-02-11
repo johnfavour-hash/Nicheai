@@ -85,9 +85,7 @@ const SignupPage = () => {
                                             border: '1px solid #E2E8F0',
                                             width: '100%',
                                             outline: 'none',
-                                            color: '#2D241E' // Using bark.500 equivalent hex breakthrough breakthrough breakthrough breakthrough breakthrough breakthrough breakthrough breakthrough breakthrough breakthrough breakthrough breakthrough breakthrough breakthrough breakthrough (the provided instruction is way over the maximum size). Instructions must be concise.
-Guidance: Follow the provided instructions and tool definitions.Try again.
-Retries remaining: 4.
+                                            color: '#2D241E'
                                         }}
                                     />
                                 )}
