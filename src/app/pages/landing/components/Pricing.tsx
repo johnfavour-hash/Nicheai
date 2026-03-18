@@ -4,7 +4,10 @@ import {
 } from "@chakra-ui/react";
 import { Check, Zap, Crown, Building } from "lucide-react";
 import { useNavigate } from "react-router";
+import { useState } from "react";
 import { motion } from "framer-motion";
+import { supabase } from "@configs/supabase";
+import useAuthStore from "@stores/auth.store";
 import { fadeInUp, staggerContainer } from "@utils/animations";
 
 const MotionBox = motion(Box);
@@ -13,6 +16,7 @@ const MotionSimpleGrid = motion(SimpleGrid);
 
 const plans = [
     {
+        id: "starter",
         name: "Starter",
         price: "0",
         tokens: "1,000 Free Tokens",
@@ -21,6 +25,7 @@ const plans = [
         featured: false,
     },
     {
+        id: "pro_pack",
         name: "Creator Pro",
         price: "29",
         tokens: "50,000 Tokens / Mo",
@@ -29,6 +34,7 @@ const plans = [
         featured: true,
     },
     {
+        id: "studio",
         name: "Studio",
         price: "99",
         tokens: "250,000 Tokens / Mo",
@@ -40,6 +46,40 @@ const plans = [
 
 const Pricing = () => {
     const navigate = useNavigate();
+    const { user } = useAuthStore();
+    const [loading, setLoading] = useState<string | null>(null);
+
+    const handleSubscription = async (planId: string) => {
+        if (!user) {
+            navigate("/auth/signup");
+            return;
+        }
+
+        setLoading(planId);
+
+        try {
+            const { data, error } = await supabase.functions.invoke('create-checkout', {
+                body: {
+                    plan: planId,
+                    user_id: user.id,
+                    user_email: user.email
+                }
+            });
+
+            if (error) throw error;
+
+            if (data?.url) {
+                window.location.href = data.url;
+            } else {
+                throw new Error("Failed to create checkout session");
+            }
+        } catch (error: any) {
+            console.error("Subscription error:", error);
+            // You might want to add a toast notification here
+        } finally {
+            setLoading(null);
+        }
+    };
 
     return (
         <Box as="section" id="pricing" py={24} bg="cream.100">
@@ -128,7 +168,8 @@ const Pricing = () => {
                                     bg={plan.featured ? "white" : "bark.500"}
                                     color={plan.featured ? "bronze.500" : "white"}
                                     _hover={{ opacity: 0.9 }}
-                                    onClick={() => navigate("/auth/signup")}
+                                    loading={loading === plan.id}
+                                    onClick={() => handleSubscription(plan.id)}
                                 >
                                     Start with {plan.name === "Starter" ? "Free Tokens" : "Pro Pack"}
                                 </Button>

@@ -121,7 +121,7 @@ export const BrandKitManager = () => {
                                     <Text fontSize="xs" fontWeight="bold" color="bark.300" mb={3}>TYPOGRAPHY</Text>
                                     <HStack color="bark.500">
                                         <Type size={16} />
-                                        <Text fontSize="sm" fontWeight="bold">Inter, Playfair Display</Text>
+                                        <Text fontSize="sm" fontWeight="bold">Poppins, Playfair Display</Text>
                                     </HStack>
                                 </Box>
                             </VStack>

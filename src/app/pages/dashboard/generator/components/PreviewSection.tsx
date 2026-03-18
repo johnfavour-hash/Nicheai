@@ -5,7 +5,8 @@ import {
     Heading,
     HStack,
     Center,
-    Button
+    Button,
+    Icon
 } from "@chakra-ui/react";
 import { Eye, Smartphone } from "lucide-react";
 import { InstagramPreview } from "@components/previews/InstagramPreview";
@@ -15,13 +16,14 @@ import { TwitterPreview } from "@components/previews/TwitterPreview";
 interface PreviewSectionProps {
     platform: string;
     content: string;
+    mode: string;
 }
 
 import { VideoEditorModal } from "@components/dashboard/modals/VideoEditorModal";
-import { Sparkles } from "lucide-react";
+import { Sparkles, Image as ImageIcon, Video } from "lucide-react";
 import { useState } from "react";
 
-const PreviewSection = ({ platform, content }: PreviewSectionProps) => {
+const PreviewSection = ({ platform, content, mode }: PreviewSectionProps) => {
     const [isRefineOpen, setIsRefineOpen] = useState(false);
     // Generate some mock hashtags if not provided in content
     const hashtags = content.includes("#") ? "" : "#nicheai #ai #trends";
@@ -86,7 +88,7 @@ const PreviewSection = ({ platform, content }: PreviewSectionProps) => {
                     zIndex={1}
                 >
                     <Smartphone size={14} color="var(--chakra-colors-goldenrod-500)" />
-                    <Text fontSize="xs" fontWeight="bold" color="bark.500" textTransform="uppercase">
+                    <Text fontSize="xs" fontWeight="semibold" color="bark.500" textTransform="uppercase">
                         {platform} View
                     </Text>
                 </Box>
@@ -103,29 +105,53 @@ const PreviewSection = ({ platform, content }: PreviewSectionProps) => {
                         '&::-webkit-scrollbar-thumb': { background: '#F4F2EF' },
                     }}
                 >
-                    {platform === "instagram" && (
-                        <InstagramPreview
-                            caption={content || "Your caption will appear here..."}
-                            hashtags={hashtags}
-                        />
-                    )}
-                    {platform === "tiktok" && (
-                        <TikTokPreview
-                            caption={content || "Your video caption will appear here..."}
-                            hashtags={hashtags}
-                        />
-                    )}
-                    {platform === "twitter" && (
-                        <TwitterPreview
-                            text={content || "What's happening?"}
-                        />
+                    {mode === "text" ? (
+                        <>
+                            {platform === "instagram" && (
+                                <InstagramPreview
+                                    caption={content || "Your caption will appear here..."}
+                                    hashtags={hashtags}
+                                />
+                            )}
+                            {platform === "tiktok" && (
+                                <TikTokPreview
+                                    caption={content || "Your video caption will appear here..."}
+                                    hashtags={hashtags}
+                                />
+                            )}
+                            {platform === "twitter" && (
+                                <TwitterPreview
+                                    text={content || "What's happening?"}
+                                />
+                            )}
+                        </>
+                    ) : (
+                        <VStack gap={4} textAlign="center" p={8}>
+                            <Center boxSize="120px" bg="white" borderRadius="2xl" shadow="md">
+                                <Icon
+                                    as={mode === "image" ? ImageIcon : Video}
+                                    boxSize="48px"
+                                    color="goldenrod.500"
+                                />
+                            </Center>
+                            <Box>
+                                <Text fontWeight="semibold" color="bark.500">
+                                    {mode === "image" ? "AI Canvas Preview" : "Video Production Preview"}
+                                </Text>
+                                <Text fontSize="xs" color="bark.200" maxW="200px">
+                                    Simulated preview for {platform}. Real-time rendering enabled after asset generation.
+                                </Text>
+                            </Box>
+                        </VStack>
                     )}
                 </Box>
             </Center>
 
             <Box p={4} bg="goldenrod.50" borderRadius="xl">
                 <Text fontSize="xs" color="goldenrod.700" fontWeight="medium">
-                    Pro Tip: Add media in the next step to see a full visual preview.
+                    {mode === "text"
+                        ? "Pro Tip: Add media in the next step to see a full visual preview."
+                        : `Pro Tip: Refine your ${mode} prompt to get higher resolution results.`}
                 </Text>
             </Box>
         </VStack>
@@ -133,3 +159,4 @@ const PreviewSection = ({ platform, content }: PreviewSectionProps) => {
 };
 
 export default PreviewSection;
+

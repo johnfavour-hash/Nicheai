@@ -145,8 +145,10 @@ const Sidebar = ({ isMobileMenuOpen = false, onClose }: SidebarProps) => {
                         bg="white"
                         borderRightWidth={1}
                         borderColor="cream.300"
-                        position={{ base: "fixed", lg: "sticky" }}
+                        position={{ base: "fixed", lg: "relative" }}
                         top={0}
+                        left={0}
+                        bottom={0}
                         animate={{ x: 0 }}
                         initial={{ x: window.innerWidth < 1024 ? "-100%" : 0 }}
                         exit={{ x: "-100%" }}
@@ -168,6 +170,7 @@ const Sidebar = ({ isMobileMenuOpen = false, onClose }: SidebarProps) => {
                                 color="bark.300"
                                 minW={10}
                                 p={0}
+                                display={{ base: "none", lg: "flex" }}
                             >
                                 {isCollapsed ? <ChevronRight size={18} /> : <ChevronLeft size={18} />}
                             </Button>

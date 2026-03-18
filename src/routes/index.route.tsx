@@ -9,6 +9,11 @@ import ProtectedRoute from "@components/ProtectedRoute";
 const LandingPage = lazy(() => import("@pages/landing/page"));
 const DashboardPage = lazy(() => import("@pages/dashboard/page"));
 const GeneratorPage = lazy(() => import("@pages/dashboard/generator/page"));
+const GeneratorHub = lazy(() => import("@pages/dashboard/generator/Hub"));
+const TextStudio = lazy(() => import("@pages/dashboard/generator/TextStudio"));
+const ImageStudio = lazy(() => import("@pages/dashboard/generator/ImageStudio"));
+const VideoLab = lazy(() => import("@pages/dashboard/generator/VideoLab"));
+const SocialPreview = lazy(() => import("@pages/dashboard/generator/SocialPreview"));
 const SettingsPage = lazy(() => import("@pages/dashboard/settings/page"));
 const WorkspacePage = lazy(() => import("@pages/dashboard/workspace/page"));
 const AnalyticsPage = lazy(() => import("@pages/dashboard/analytics/page"));
@@ -89,7 +94,48 @@ const Router = () => {
                                     <GeneratorPage />
                                 </Suspense>
                             }
-                        />
+                        >
+                            <Route
+                                index
+                                element={
+                                    <Suspense fallback={<LoadingFallback />}>
+                                        <GeneratorHub />
+                                    </Suspense>
+                                }
+                            />
+                            <Route
+                                path="text"
+                                element={
+                                    <Suspense fallback={<LoadingFallback />}>
+                                        <TextStudio />
+                                    </Suspense>
+                                }
+                            />
+                            <Route
+                                path="image"
+                                element={
+                                    <Suspense fallback={<LoadingFallback />}>
+                                        <ImageStudio />
+                                    </Suspense>
+                                }
+                            />
+                            <Route
+                                path="video"
+                                element={
+                                    <Suspense fallback={<LoadingFallback />}>
+                                        <VideoLab />
+                                    </Suspense>
+                                }
+                            />
+                            <Route
+                                path="preview"
+                                element={
+                                    <Suspense fallback={<LoadingFallback />}>
+                                        <SocialPreview />
+                                    </Suspense>
+                                }
+                            />
+                        </Route>
                         {/* Placeholder routes for nested navigation */}
                         <Route
                             path="workspace"

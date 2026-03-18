@@ -1,5 +1,5 @@
-import { Flex, Box, Input, HStack, Text, Button, VStack, Heading, IconButton, Icon } from "@chakra-ui/react";
-import { Search, Bell, Grid, Menu } from "lucide-react";
+import { Flex, Box, Input, HStack, Text, Button, VStack, Heading, IconButton, Icon, Breadcrumb } from "@chakra-ui/react";
+import { Search, Bell, Grid, Menu, ChevronRight } from "lucide-react";
 import useAuthStore from "@stores/auth.store";
 import { useLocation, useNavigate } from "react-router";
 
@@ -12,13 +12,17 @@ const TopBar = ({ onMenuToggle }: TopBarProps) => {
     const location = useLocation();
     const navigate = useNavigate();
 
-    const getPageTitle = (pathname: string) => {
-        if (pathname.includes("/generator")) return "Content Generator";
-        if (pathname.includes("/settings")) return "Settings";
-        if (pathname.includes("/workspace")) return "Workspace";
-        if (pathname.includes("/analytics")) return "Analytics";
-        return "Dashboard";
+    const getBreadcrumbs = (pathname: string) => {
+        const parts = pathname.split('/').filter(Boolean);
+        return parts.map((part, index) => {
+            const href = '/' + parts.slice(0, index + 1).join('/');
+            const label = part.charAt(0).toUpperCase() + part.slice(1);
+            return { label, href, isCurrent: index === parts.length - 1 };
+        });
     };
+
+    const breadcrumbs = getBreadcrumbs(location.pathname);
+    const pageTitle = breadcrumbs.length > 0 ? breadcrumbs[breadcrumbs.length - 1].label : "Dashboard";
 
     return (
         <Flex
@@ -45,9 +49,29 @@ const TopBar = ({ onMenuToggle }: TopBarProps) => {
                     <Icon as={Menu} />
                 </IconButton>
 
-                <Heading fontSize={{ base: "lg", md: "xl" }} color="bark.500" minW={{ base: "auto", md: "200px" }}>
-                    {getPageTitle(location.pathname)}
-                </Heading>
+                <VStack align="start" gap={0}>
+                    <Breadcrumb.Root size="sm" color="bark.200" separator={<ChevronRight size={12} />} display={{ base: "none", md: "flex" }}>
+                        <Breadcrumb.List>
+                            {breadcrumbs.map((bc, i) => (
+                                <Breadcrumb.Item key={i}>
+                                    <Breadcrumb.Link asChild>
+                                        <Text
+                                            cursor="pointer"
+                                            onClick={() => navigate(bc.href)}
+                                            fontWeight={bc.isCurrent ? "bold" : "medium"}
+                                            color={bc.isCurrent ? "bark.500" : "bark.200"}
+                                        >
+                                            {bc.label}
+                                        </Text>
+                                    </Breadcrumb.Link>
+                                </Breadcrumb.Item>
+                            ))}
+                        </Breadcrumb.List>
+                    </Breadcrumb.Root>
+                    <Heading fontSize={{ base: "lg", md: "xl" }} color="bark.500" fontWeight="black" letterSpacing="tight">
+                        {pageTitle}
+                    </Heading>
+                </VStack>
 
                 {/* Search Bar */}
                 <Box w="400px" position="relative" display={{ base: "none", lg: "block" }}>
